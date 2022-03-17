@@ -32,4 +32,4 @@ COPY --from=ffmpeg / /
 COPY --from=builder /var/www/api/node_modules ./node_modules
 COPY --from=builder /var/www/api/lib ./lib
 
-CMD ["npm", "run", "script:audio"]
+CMD ["npm", "start"]
