@@ -3,7 +3,8 @@
 import yargs from 'yargs'
 import Queue from 'bull'
 import winston from 'winston'
-import convertAudioJob from './job'
+import convertAudioJob from './jobs/convert-audio'
+import audioDurationJob from './jobs/audio-duration'
 
 const REDIS_CONFIG = {
   port: process.env.REDIS_PORT || 6379,
@@ -40,39 +41,80 @@ yargs // eslint-disable-line
         default: 'convert-audio'
       })
   }, (argv) => {
-    const queue = new Queue(argv.name, queueOptions)
-
-    queue.process(convertAudioJob)
-
-    logger.info('Queue processing started')
-
-    queue.on('error', (err) => {
-      logger.error(err)
-    })
-
-    queue.on('failed', (job, err) => {
-      logger.error(err)
-    })
-
-    queue.on('paused', () => {
-      logger.info('job paused')
-    })
-
-    queue.on('resumed', (job) => {
-      logger.info('job resumed')
-    })
-
-    queue.on('cleaned', (jobs, type) => {
-      logger.info('job cleaned')
-    })
-
-    queue.on('drained', () => {
-      logger.info('job drained')
-    })
-
-    queue.on('removed', (job) => {
-      logger.info('job removed')
-    })
+    audioQueue(argv.name)
+    audioDurationQueue()
   })
   .help()
   .argv
+
+function audioQueue (name) {
+  const queue = new Queue(name, queueOptions)
+
+  queue.process(convertAudioJob)
+
+  logger.info('Queue processing started')
+
+  queue.on('error', (err) => {
+    logger.error(err)
+  })
+
+  queue.on('failed', (job, err) => {
+    logger.error(err)
+  })
+
+  queue.on('paused', () => {
+    logger.info('job paused')
+  })
+
+  queue.on('resumed', (job) => {
+    logger.info('job resumed')
+  })
+
+  queue.on('cleaned', (jobs, type) => {
+    logger.info('job cleaned')
+  })
+
+  queue.on('drained', () => {
+    logger.info('job drained')
+  })
+
+  queue.on('removed', (job) => {
+    logger.info('job removed')
+  })
+}
+
+function audioDurationQueue () {
+  const queue = new Queue('audio-duration', queueOptions)
+
+  queue.process(audioDurationJob)
+
+  logger.info('Audio duration queue started')
+
+  queue.on('error', (err) => {
+    logger.error(err)
+  })
+
+  queue.on('failed', (job, err) => {
+    logger.error(err)
+  })
+
+  queue.on('paused', () => {
+    logger.info('job paused')
+  })
+
+  queue.on('resumed', (job) => {
+    logger.info('job resumed')
+  })
+
+  queue.on('cleaned', (jobs, type) => {
+    logger.info('job cleaned')
+  })
+
+  queue.on('drained', () => {
+    logger.info('job drained')
+  })
+
+  queue.on('removed', (job) => {
+    logger.info('job removed')
+  })
+}
