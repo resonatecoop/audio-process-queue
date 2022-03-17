@@ -9,6 +9,7 @@ RUN apk add --update-cache --repository http://dl-3.alpinelinux.org/alpine/lates
 
 COPY . .
 
+RUN npm install
 RUN npm run build
 
 FROM jrottenberg/ffmpeg:5.0-alpine as ffmpeg
