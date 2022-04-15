@@ -8,6 +8,13 @@ Convert audio files to streamable m4a using fluent-ffmpeg.
 npm install
 ```
 
+## Install ffmpeg with libfdk\_aac
+
+```sh
+brew tap homebrew-ffmpeg/ffmpeg
+brew install homebrew-ffmpeg/ffmpeg/ffmpeg --with-fdk-aac
+```
+
 ## Build (babel)
 
 ```sh
