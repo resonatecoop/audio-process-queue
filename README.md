@@ -15,6 +15,14 @@ brew tap homebrew-ffmpeg/ffmpeg
 brew install homebrew-ffmpeg/ffmpeg/ffmpeg --with-fdk-aac
 ```
 
+## Install redis
+
+```sh
+brew install redis
+```
+
+Update your redis config to use a password.
+
 ## Build (babel)
 
 ```sh
