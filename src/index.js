@@ -50,6 +50,8 @@ yargs // eslint-disable-line
 function audioQueue (name) {
   const queue = new Queue(name, queueOptions)
 
+  logger.info(`Redis connection to: ${queueOptions.redis.host}:${queueOptions.redis.port}`)
+
   queue.process(convertAudioJob)
 
   logger.info('Queue processing started')
