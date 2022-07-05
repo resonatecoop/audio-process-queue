@@ -50,8 +50,6 @@ yargs // eslint-disable-line
 function audioQueue (name) {
   const worker = new Worker(name, convertAudioJob, workerOptions)
 
-  logger.info(`Redis connection to: ${workerOptions.redis.host}:${workerOptions.redis.port}`)
-
   logger.info('Worker is running')
 
   worker.on('completed', (job) => {
