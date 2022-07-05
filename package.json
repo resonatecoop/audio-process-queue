@@ -16,7 +16,7 @@
     "test:deps": "dependency-check ./lib/*.js ./lib/**/*.js ./test/*.js --no-dev --i dotenv-safe"
   },
   "dependencies": {
-    "bull": "^4.8.4",
+    "bullmq": "^1.86.4",
     "dotenv-safe": "^8.2.0",
     "fluent-ffmpeg": "^2.1.2",
     "winston": "^3.2.1",
