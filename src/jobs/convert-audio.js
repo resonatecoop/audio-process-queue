@@ -33,7 +33,7 @@ export default async job => {
           .noVideo()
           .outputOptions('-movflags', '+faststart', '-f', 'ipod')
           .audioChannels(2)
-          .audioBitrate('96k')
+          .audioBitrate('128k')
           .audioFrequency(48000)
           .audioCodec('libfdk_aac') // convert using Fraunhofer FDK AAC
           .on('start', () => logger.info('Converting original to m4a'))
